@@ -8,8 +8,6 @@ import Header from "../../../core/Components/Header/Header";
 
 const OrderDetail = () => {
   const { customer_id, id } = useParams();
-  console.log("customer_id");
-  console.log(customer_id);
   const bgClass = "bg-white rounded-lg p-4 shadow-lg py-[30px] px-[20px]";
   const renderOrderDetail = (order) => {
     return (
@@ -45,8 +43,6 @@ const OrderDetail = () => {
     );
   };
   const contentHeader = (order) => {
-    console.log("order in header");
-    console.log(order);
     return (
       <>
         <div className={clsx("content-header", bgClass, "w-full")}>

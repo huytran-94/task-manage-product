@@ -2,7 +2,7 @@ import { Avatar } from "antd";
 import React from "react";
 import { isValidUrl } from "../../utils/utils";
 
-import avatar from "../../assets/images/avatar_2.svg";
+import avatar from "../../assets/images/avatar.svg";
 
 const CustomerAvatarInfo = ({ customerData }) => {
   const renderAvatarInfo = () => {

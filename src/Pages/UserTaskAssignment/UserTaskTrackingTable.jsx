@@ -7,7 +7,7 @@ import UserTaskTrackingActionButtons from "./UserTaskTrackingActionButtons";
 const UserTaskTrackingTable = () => {
   let currentUserInfo = LOCAL_SERVICE.user.get();
 
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(null);
   // fetch api
   useEffect(() => {
     USER_SERVICE.getSingleUserInfo(currentUserInfo.id)
@@ -43,34 +43,20 @@ const UserTaskTrackingTable = () => {
     },
   ];
 
-  // rowSelection object indicates the need for row selection
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-    getCheckboxProps: (record) => ({
-      disabled: record.name === "Disabled User",
-      // Column configuration not to be checked
-      name: record.name,
-    }),
-  };
-
-  return (
-    <Table
-      showHeader={false}
-      rowKey={(task) => {
-        return task.id.toString();
-      }}
-      columns={columns}
-      dataSource={taskList}
-      pagination={false}
-      className="user-task-tracking-table"
-    />
-  );
+  if (taskList) {
+    return (
+      <Table
+        showHeader={false}
+        rowKey={(task) => {
+          return task.id.toString();
+        }}
+        columns={columns}
+        dataSource={taskList}
+        pagination={false}
+        className="user-task-tracking-table"
+      />
+    );
+  }
 };
 
 export default UserTaskTrackingTable;

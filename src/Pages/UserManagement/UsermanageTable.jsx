@@ -6,7 +6,7 @@ import USER_SERVICE from "../../core/services/userServ";
 import UserActionButtons from "./UserActionButtons";
 
 const UserManageTable = () => {
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(null);
   // fetch api
   useEffect(() => {
     let returnedData = [];
@@ -46,32 +46,18 @@ const UserManageTable = () => {
     },
   ];
 
-  // rowSelection object indicates the need for row selection
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-    getCheckboxProps: (record) => ({
-      disabled: record.name === "Disabled User",
-      // Column configuration not to be checked
-      name: record.name,
-    }),
-  };
-
-  return (
-    <Table
-      showHeader={false}
-      rowKey={(user) => user.id.toString()}
-      columns={columns}
-      dataSource={userList}
-      pagination={false}
-      className="user-manage-table"
-    />
-  );
+  if (userList) {
+    return (
+      <Table
+        showHeader={false}
+        rowKey={(user) => user.id.toString()}
+        columns={columns}
+        dataSource={userList}
+        pagination={false}
+        className="user-manage-table"
+      />
+    );
+  }
 };
 
 export default UserManageTable;

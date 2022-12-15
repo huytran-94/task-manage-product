@@ -44,8 +44,7 @@ const LoginPage = () => {
             setTimeout(() => {
               navigate("/");
               dispatch(userActions.setUserProfile(res[0][0]));
-              LOCAL_SERVICE.user.set(res[0][0], 
-              );
+              LOCAL_SERVICE.user.set(res[0][0], "admin");
             }, 2500);
           }
 

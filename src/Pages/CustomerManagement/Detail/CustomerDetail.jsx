@@ -1,13 +1,15 @@
 import { Avatar, Space, Tabs } from "antd";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SectionWrapper from "../../../core/Components/SectionWrapper/SectionWrapper";
 
 import CUSTOMER_SERVICE from "../../../core/services/customerServ";
 import Header from "../../../core/Components/Header/Header";
 import CustomerOrderHistory from "./CustomerOrderHistory";
+
+import avatar from "../../../core/assets/images/avatar.svg";
+import { isValidUrl } from "../../../core/utils/utils";
 
 const CustomerDetail = () => {
   const { id } = useParams();
@@ -145,7 +147,14 @@ const CustomerDetail = () => {
             <div className="profile-info flex flex-col gap-2 items-center justify-center">
               <div className="col flex justify-center items-center w-full">
                 <div className="avatar">
-                  <Avatar size={300} src={customerInfo.avatar} />
+                  <Avatar
+                    size={300}
+                    src={
+                      isValidUrl(customerInfo.avatar)
+                        ? customerInfo.avatar
+                        : avatar
+                    }
+                  />
                 </div>
               </div>
 

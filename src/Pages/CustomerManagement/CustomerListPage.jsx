@@ -19,7 +19,7 @@ import Notification from "../../core/Components/Notification/Notification";
 const CustomerListPage = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const [customerList, setCustomerList] = useState([]);
+  const [customerList, setCustomerList] = useState(null);
 
   useEffect(() => {
     CUSTOMER_SERVICE.getCustomerList()
@@ -30,6 +30,7 @@ const CustomerListPage = () => {
         console.log(error);
       });
   }, []);
+
   let handleSearchInput = (searchTxt) => {
     setSearch(searchTxt);
   };
@@ -45,15 +46,13 @@ const CustomerListPage = () => {
     const fileRef = ref(storage, `files/${fileName}_${currentDate}.xlsx`);
     uploadBytes(fileRef, fileBlobData)
       .then(() => {
-        alert("upload ok");
         return getDownloadURL(fileRef);
       })
       .then((url) => {
-        console.log(url);
         let templateParams = {
           from_name: "system",
           message: `Link download: ${url}`,
-          to_email: "scorpionthemes944@gmail.com",
+          to_email: "",
         };
         return sendMailWithFile(templateParams);
       })
@@ -64,6 +63,7 @@ const CustomerListPage = () => {
       })
       .catch((error) => {
         Notification("error", "Error", "Something went wrong");
+        console.log("error");
         console.log(error);
       });
   };
@@ -95,7 +95,7 @@ const CustomerListPage = () => {
       </div>
     );
   };
-  if (customerList.length) {
+  if (customerList) {
     return (
       <>
         <Header handleSearchInput={handleSearchInput} />

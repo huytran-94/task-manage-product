@@ -48,7 +48,7 @@ const UserTaskAssign = () => {
                       email
                     </span>
                     <span className="char--special mx-1">:</span>
-                    <span className="txt capitalize">{userInfo.email}</span>
+                    <span className="txt">{userInfo.email}</span>
                   </li>
                   <li className="mb-3">
                     <span className="heading capitalize text-sm font-semibold text-[#292d32]">
